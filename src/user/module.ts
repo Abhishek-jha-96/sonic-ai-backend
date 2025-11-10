@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserController } from './controller';
 import { UserService } from './service';
 import { PrismaService } from 'src/infrastructure/persistence/prisma.service';
-import { UserPersistenceModule } from './infrastructure/module';
+import { UserPersistenceModule } from './infrastructure/persistance.module';
 
 @Module({
   imports: [UserPersistenceModule],
