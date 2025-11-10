@@ -21,24 +21,14 @@ This the repository for sonic ai application which is a text to audio and audio 
 │   ├── find-all.dto.ts
 │   └── update.dto.ts
 ├── infrastructure
-│   └── persistence
-│       ├── document
-│       │   ├── document-persistence.module.ts
-│       │   ├── entities
-│       │   │   └── [SCHEMA].ts
-│       │   ├── mappers
-│       │   │   └── [MAPPER].ts
-│       │   └── repositories
-│       │       └── [ADAPTER].repository.ts
-│       ├── relational
-│       │   ├── entities
-│       │   │   └── [ENTITY].ts
-│       │   ├── mappers
-│       │   │   └── [MAPPER].ts
-│       │   ├── relational-persistence.module.ts
-│       │   └── repositories
-│       │       └── [ADAPTER].repository.ts
-│       └── [PORT].repository.ts
+│       ├── entities
+│       │   └── [ENTITY].ts
+│       ├── mappers
+│       │   └── [MAPPER].ts
+│       ├── persistence.module.ts
+│       └── repositories
+│       │   └── [ADAPTER].adapter.ts
+│       └── [PORT].port.ts
 ├── controller.ts
 ├── module.ts
 └── service.ts
