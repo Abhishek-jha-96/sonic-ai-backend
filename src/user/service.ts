@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create.dto';
 import { UpdateUserDto } from './dto/update.dto';
 import { User } from './domain/user';
 import { UserRepositoryPort } from './infrastructure/user.port';
+import { userNotFound } from './constants';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
 
   async getUserById(id: string): Promise<User> {
     const user = await this.userRepo.findById(id);
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException(userNotFound);
     return user;
   }
 
