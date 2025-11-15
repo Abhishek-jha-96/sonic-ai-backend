@@ -19,6 +19,10 @@ export class UserService {
     return user;
   }
 
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepo.findAll();
+  }
+
   async updateUser(id: string, data: UpdateUserDto): Promise<User> {
     return this.userRepo.update(id, data);
   }

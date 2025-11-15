@@ -1,11 +1,20 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UserRepositoryPort } from '../user.port';
 import { PrismaService } from 'src/infrastructure/persistence/prisma.service';
 import { AuthProvider, User } from 'src/user/domain/user';
 import { CreateUserDto } from 'src/user/dto/create.dto';
 import { UserMapper } from '../mapper/user.mapper';
 import { UpdateUserDto } from 'src/user/dto/update.dto';
-import { passwordRequired, userAlreadyExists, userNotFound } from 'src/user/constants';
+import {
+  passwordRequired,
+  userAlreadyExists,
+  userNotFound,
+} from 'src/user/constants';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -31,9 +40,8 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
 
     // hash password
     const hashedPassword = data.password
-    ? await bcrypt.hash(data.password, 12)
-    : null;
-
+      ? await bcrypt.hash(data.password, 12)
+      : null;
 
     const user = await this.prisma.user.create({
       data: {
@@ -49,6 +57,15 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
   async findById(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
     return user ? UserMapper.toDomain(user) : null;
+  }
+
+  async findAll(): Promise<User[]> {
+    const users = await this.prisma.user.findMany();
+
+    // no users, return empty array
+    if (!users.length) return [];
+
+    return users.map((user) => UserMapper.toDomain(user));
   }
 
   async update(id: string, data: UpdateUserDto): Promise<User> {

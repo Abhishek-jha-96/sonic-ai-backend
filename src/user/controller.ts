@@ -12,6 +12,11 @@ export class UserController {
     return this.userService.createUser(data);
   }
 
+  @Get('/')
+  async findAll() {
+    return this.userService.getAllUsers();
+  }
+
   @Get('/:id')
   async findOne(@Param('id') id: string) {
     return this.userService.getUserById(id);
