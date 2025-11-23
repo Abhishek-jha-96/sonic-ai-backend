@@ -11,6 +11,7 @@ export class UserMapper {
       prismaUser.is_verified,
       prismaUser.created_at,
       prismaUser.modified_at,
+      prismaUser.password || undefined,
     );
   }
 }
