@@ -19,7 +19,7 @@ import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserRepositoryAdapter implements UserRepositoryPort {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(data: CreateUserDto): Promise<User> {
     // noramlize email
@@ -56,6 +56,11 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
 
   async findById(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({ where: { id } });
+    return user ? UserMapper.toDomain(user) : null;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
     return user ? UserMapper.toDomain(user) : null;
   }
 

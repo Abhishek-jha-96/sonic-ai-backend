@@ -12,5 +12,6 @@ export class User {
     public readonly is_verified: boolean,
     public readonly created_at: Date,
     public readonly modified_at: Date,
-  ) {}
+    public readonly password?: string,
+  ) { }
 }
